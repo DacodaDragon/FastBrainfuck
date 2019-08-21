@@ -29,16 +29,20 @@ Without any given parameters the brainfuck should run the [mandelbrot](https://g
 > Filepath towards a brainfuck file containing brainfuck code.
 
 > -uo
+>
 > Runs the brainfuck code in a traditional unoptimized brainfuck interpreter.
 
 > -t
+>
 > Prints out the time it took from the start of the program till finish.
 
 > -r
+>
 > Races a version of the unoptimized code vs the optimized code sequentially. When combined with `-t` the code will display the times and time difference between the two.
 > This flag overrules `-uo`
 
 > -rainbow
+>
 > Will make the console print in rainbow colors depending on the character value.
 
 
