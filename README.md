@@ -8,8 +8,8 @@ Keep in mind that these value's are raw data. So this version of the language is
 - `- <amount>` Subtracts 'amount' from the current cell
 - `> <amount>` Moves head 'amount' tiles to the left
 - `< <amount>` Moves head 'amount' tiles to the right 
-- `[ <jump index>` Moves head to 'jump index' if value of head is zero
-- `] <jump index>` Moves head to 'jump index' if value of head is not zero
+- `[ <jump index>` Moves the instruction pointer to 'jump index' if value of head is zero
+- `] <jump index>` Moves the instruction pointer to 'jump index' if value of head is not zero
 - `,` Ask user for numeric value
 - `.` Print head out as character value
 
