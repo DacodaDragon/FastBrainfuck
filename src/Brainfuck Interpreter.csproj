@@ -44,8 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrainfuckInterpreter.cs" />
+    <Compile Include="FastBrainfuck.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="OptimizedBrainfuck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

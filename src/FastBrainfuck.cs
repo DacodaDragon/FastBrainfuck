@@ -76,7 +76,7 @@ namespace Brainfuck_Interpreter
             return operations.ToArray();
         }
 
-        public static void Collapse(List<int> operations, string code, ref int index)
+        private static void Collapse(List<int> operations, string code, ref int index)
         {
             char operation = code[index];
             operations.Add(operation);

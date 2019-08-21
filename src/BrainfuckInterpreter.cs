@@ -13,7 +13,6 @@ namespace Brainfuck_Interpreter
 
             for (int i = 0; i < code.Length; i++)
             {
-                char a = code[i];
                 switch (code[i])
                 {
                     case '>': ++pointer; break;
