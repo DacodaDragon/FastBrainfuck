@@ -24,24 +24,24 @@ run the exe as:
 Without any given parameters the brainfuck should run the [mandelbrot](https://github.com/erikdubbelboer/brainfuck-jit/blob/master/mandelbrot.bf) file and render out a nice cute little mandelbrot!
 
 ## CLI Parameters and flags
-> -fn [path]
+> **-fn [path]**
 > 
 > Filepath towards a brainfuck file containing brainfuck code.
 
-> -uo
+> **-uo**
 >
 > Runs the brainfuck code in a traditional unoptimized brainfuck interpreter.
 
-> -t
+> **-t**
 >
 > Prints out the time it took from the start of the program till finish.
 
-> -r
+> **-r**
 >
 > Races a version of the unoptimized code vs the optimized code sequentially. When combined with `-t` the code will display the times and time difference between the two.
 > This flag overrules `-uo`
 
-> -rainbow
+> **-rainbow**
 >
 > Will make the console print in rainbow colors depending on the character value.
 
