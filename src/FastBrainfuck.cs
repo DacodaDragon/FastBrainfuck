@@ -21,16 +21,23 @@ namespace Brainfuck_Interpreter
                     case '<':
                     case '+':
                     case '-':
-                        Collapse(operations, code, ref i); break;
+                        Collapse(operations, code, ref i); continue;
                     case '.':
                     case ',':
                         operations.Add(code[i]); break;
                     case '[':
+                        if (CheckForHopping(operations, code, ref i))
+                            continue;
+                        if (CheckForMove(operations, code, ref i))
+                            continue;
+                        if (CheckForEmpty(operations, code, ref i))
+                            continue;
+                        goto case ']';
                     case ']':
                         operations.Add(code[i]);
                         jumpOperationIndices.Add(operations.Count - 1);
                         operations.Add(NUMB_PLACEHOLDER);
-                        break;
+                        continue;
                 }
             }
 
@@ -76,6 +83,88 @@ namespace Brainfuck_Interpreter
             return operations.ToArray();
         }
 
+        private static bool CheckForEmpty(List<int> operations, string code, ref int index)
+        {
+            if (code[index] != '[')
+                return false;
+
+            if (code[index + 1] != '-')
+
+                return false;
+            if (code[index + 2] != ']')
+                return false;
+
+            index += 2;
+            operations.Add('e');
+            return true;
+        }
+
+
+        // Finds patterns of [->>+<<] and turns them into a M<value> statement
+        private static bool CheckForMove(List<int> operations, string code, ref int index)
+        {
+            int i = index;
+            if (code[i] != '[')
+                return false;
+
+            if (code[++i] != '-')
+                return false;
+
+            if (code[++i] != '<' && code[i] != '>')
+                return false;
+
+            char moveDirection = code[i];
+            int moveCount = Count(moveDirection, code, ref i);
+
+
+            if (moveCount > 20 || code[i] != '+')
+                return false;
+
+            if (code[++i] != (moveDirection == '<' ? '>' : '<'))
+                return false;
+
+            int moveBackCount = Count(moveDirection == '<' ? '>' : '<', code, ref i);
+
+            if (code[i] != ']' || moveCount != moveBackCount)
+                return false;
+
+            operations.Add('m');
+            operations.Add(moveDirection == '<' ? -moveCount : moveCount);
+            index = i;
+            return true;
+        }
+
+        private static int Count(char character, string code, ref int index)
+        {
+            int i = index;
+            while (code[++i] == character) { }
+            int count = (i - index);
+            index = i;
+            return count;
+        }
+
+        private static bool CheckForHopping(List<int> operations, string code, ref int index)
+        {
+            int i = index;
+            if (code[i] != '[')
+                return false;
+
+            if (code[++i] != '<' && code[i] != '>')
+                return false;
+
+            char jumpDirection = code[i];
+            while (code[++i] == jumpDirection) { };
+            if (code[i] == ']')
+            {
+                operations.Add('j');
+                int JumpAmount = (i - index) - 1;
+                operations.Add(jumpDirection == '<' ? -JumpAmount : JumpAmount);
+                index = i;
+                return true;
+            }
+            return false;
+        }
+
         private static void Collapse(List<int> operations, string code, ref int index)
         {
             char operation = code[index];
@@ -98,14 +187,17 @@ namespace Brainfuck_Interpreter
             {
                 switch ((char)code[i])
                 {
-                    case '>': pointer += code[++i]; break;
-                    case '<': pointer -= code[++i]; break;
-                    case '+': memory[pointer] += code[++i]; break;
-                    case '-': memory[pointer] -= code[++i]; break;
-                    case '.': Logger.Print((char)memory[pointer]); break;
-                    case ',': memory[pointer] = int.Parse(Console.ReadLine().Trim()); break;
-                    case '[': if (memory[pointer] == 0) i = code[++i]; else ++i; break;
-                    case ']': if (memory[pointer] != 0) i = code[++i]; else ++i; break;
+                    case '>': pointer += code[++i]; continue;
+                    case '<': pointer -= code[++i]; continue;
+                    case '+': memory[pointer] += code[++i]; continue;
+                    case '-': memory[pointer] -= code[++i]; continue;
+                    case '.': Logger.Print((char)memory[pointer]); continue;
+                    case ',': memory[pointer] = int.Parse(Console.ReadLine().Trim()); continue;
+                    case '[': if (memory[pointer] == 0) i = code[++i]; else ++i; continue;
+                    case ']': if (memory[pointer] != 0) i = code[++i]; else ++i; continue;
+                    case 'j': while (memory[pointer] != 0) pointer += code[i + 1]; ++i; continue;
+                    case 'm': memory[pointer + code[++i]] += memory[pointer]; memory[pointer] = 0; continue;
+                    case 'e': memory[pointer] = 0; continue;
                 }
             }
         }
