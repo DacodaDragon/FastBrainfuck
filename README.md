@@ -3,15 +3,18 @@ Originally handles brainfuck code accoring to brainfuck specifications that can 
 
 # Internal Fast Brain Fuck Format
 
-Keep in mind that these value's are raw data. So this version of the language isn't "keyboard programmable" instead, normal brainfuck code is compiled under the hood to the next language specification:
-- `+ <amount>` Adds 'amount' to the current cell 
-- `- <amount>` Subtracts 'amount' from the current cell
+Keep in mind that these value's are raw data. So this version of the language isn't meant to be "keyboard programmable". Instead, bnormal brainfuck code is compiled under the hood to the next language specification:
+- `+ <amount>` Adds 'amount' to the current head 
+- `- <amount>` Subtracts 'amount' from the current head
 - `> <amount>` Moves head 'amount' tiles to the left
-- `< <amount>` Moves head 'amount' tiles to the right 
-- `[ <jump index>` Moves the instruction pointer to 'jump index' if value of head is zero
-- `] <jump index>` Moves the instruction pointer to 'jump index' if value of head is not zero
+- `< <amount>` Moves head 'amoun t' tiles to the right 
+- `[ <jump index>` Moves the instruction pointer to 'jump index' if head is zero
+- `] <jump index>` Moves the instruction pointer to 'jump index' if head is not zero
 - `,` Ask user for numeric value
 - `.` Print head out as character value
+- `m <amount>` Moves a value to a cell 'amount' cells away `[->+<]`
+- `e` Resets current head at zero `[-]`
+- `j <amount>` Jumps 'amount' steps with the head until zero is found `[<<<]`
 
 This is then interpreted in a normal brainfuck like manner and increases the speed of the runtime approximately 3 fold using the [mandelbrot](https://github.com/erikdubbelboer/brainfuck-jit/blob/master/mandelbrot.bf) file as benchmark.
 
