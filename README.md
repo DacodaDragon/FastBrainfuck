@@ -1,3 +1,5 @@
+![](https://i.imgur.com/8MCFLt9.jpg)
+
 # FastBrainFuck
 Originally handles brainfuck code accoring to brainfuck specifications that can be found [here](https://github.com/brain-lang/brainfuck/blob/master/brainfuck.md), but overhauls the code by "source to source" compiling to generate two value instructions where the first value is the operation identifier and the second value is how much time the operation should be repeated or some other value helping optimize (for example what index to jump to while looping to prevent searching). 
 
