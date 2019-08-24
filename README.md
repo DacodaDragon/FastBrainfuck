@@ -1,22 +1,22 @@
 ![](https://i.imgur.com/8MCFLt9.jpg)
 
 # FastBrainFuck
-Originally handles brainfuck code accoring to brainfuck specifications that can be found [here](https://github.com/brain-lang/brainfuck/blob/master/brainfuck.md), but overhauls the code by "source to source" compiling to generate two value instructions where the first value is the operation identifier and the second value is how much time the operation should be repeated or some other value helping optimize (for example what index to jump to while looping to prevent searching). 
+The original brainfuck language specification can be found [here](https://github.com/brain-lang/brainfuck/blob/master/brainfuck.md), this executable takes brainfuck code and collapses a lot of statements down to either single value instructions or two value instructions. For example, it will take the code `<<<<<<<<<<<` and collapse it down to a single `<` followed by a 5 in binary. So it kind of becomes a BF++ type of thing.
 
 # Internal Fast Brain Fuck Format
 
-Keep in mind that these value's are raw data. So this version of the language isn't meant to be "keyboard programmable". Instead, bnormal brainfuck code is compiled under the hood to the next language specification:
+Keep in mind that these value's are raw data, thus binary values. So this version of the language isn't meant to be "keyboard programmable". Instead, normal brainfuck code is compiled under the hood to the following language specification:
 - `+ <amount>` Adds 'amount' to the current head 
 - `- <amount>` Subtracts 'amount' from the current head
 - `> <amount>` Moves head 'amount' tiles to the left
-- `< <amount>` Moves head 'amoun t' tiles to the right 
+- `< <amount>` Moves head 'amount' tiles to the right 
 - `[ <jump index>` Moves the instruction pointer to 'jump index' if head is zero
 - `] <jump index>` Moves the instruction pointer to 'jump index' if head is not zero
 - `,` Ask user for numeric value
-- `.` Print head out as character value
-- `m <amount>` Moves a value to a cell 'amount' cells away `[->+<]`
-- `e` Resets current head at zero `[-]`
-- `j <amount>` Jumps 'amount' steps with the head until zero is found `[<<<]`
+- `.` Print value at head out as character value
+- `m <amount>` Moves a value to another cell `<amount>` cells relative of head. (`[->+<]`)
+- `e` Resets value at head to zero. (`[-]`)
+- `j <amount>` Jumps head 'amount' steps until zero is found (`[<<<]`)
 
 This is then interpreted in a normal brainfuck like manner and increases the speed of the runtime approximately 3 fold using the [mandelbrot](https://github.com/erikdubbelboer/brainfuck-jit/blob/master/mandelbrot.bf) file as benchmark.
 
@@ -52,7 +52,7 @@ Without any given parameters the brainfuck should run the [mandelbrot](https://g
 
 
 # Roadmap Language Extensions
-- Add support to simplify Empty Value (`[-]`) 
-- Add support to simplify Move (add) Value (`[->+<]`)
-- Add support to simplify Multiplication (`++++[->++++<]`)
-- Add support to simplify Memory Hopping (`[<]`)
+- [x] Add support to simplify Empty Value (`[-]`) 
+- [x] Add support to simplify Move (add) Value (`[->+<]`)
+- [ ] Add support to simplify Multiplication (`++++[->++++<]`)
+- [x] Add support to simplify Memory Hopping (`[<]`)
