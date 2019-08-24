@@ -1,7 +1,7 @@
 ![](https://i.imgur.com/8MCFLt9.jpg)
 
 # FastBrainFuck
-The original brainfuck language specification can be found [here](https://github.com/brain-lang/brainfuck/blob/master/brainfuck.md), this executable takes brainfuck code and collapses a lot of statements down to either single value instructions or two value instructions. For example, it will take the code `<<<<<<<<<<<` and collapse it down to a single `<` followed by a 5 in binary. So it kind of becomes a BF++ type of thing.
+The original brainfuck language specification can be found [here](https://github.com/brain-lang/brainfuck/blob/master/brainfuck.md), this executable takes brainfuck code and collapses a lot of statements down to either single value instructions or two value instructions. For example, it will take the code `<<<<<<<<<<` and collapse it down to a single `<` followed by a 10 in binary. So it kind of becomes a BF++ type of thing.
 
 # Internal Fast Brain Fuck Format
 
