@@ -3,7 +3,7 @@
 # FastBrainFuck
 The original brainfuck language specification can be found [here](https://github.com/brain-lang/brainfuck/blob/master/brainfuck.md), this executable takes brainfuck code and collapses a lot of statements down to either single value instructions or two value instructions. For example, it will take the code `<<<<<<<<<<` and collapse it down to a single `<` followed by a 10 in binary. So it kind of becomes a BF++ type of thing.
 
-# Internal Fast Brain Fuck Format
+# Internal Language Specification
 
 Keep in mind that these value's are raw data, thus binary values. So this version of the language isn't meant to be "keyboard programmable". Instead, normal brainfuck code is compiled under the hood to the following language specification:
 - `+ <amount>` Adds 'amount' to the current head 
